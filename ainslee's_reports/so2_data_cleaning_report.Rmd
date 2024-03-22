@@ -1,0 +1,46 @@
+---
+title: "so2 data cleaning report"
+output: html_document
+date: "2024-03-22"
+---
+Imports
+```{R}
+library(tidyverse)
+```
+
+Read in the data
+```{R}
+raw2017 <- read_csv("raw data/epa_so2_2017.csv")
+raw2018 <- read_csv("raw data/epa_so2_2018.csv")
+raw2019 <- read_csv("raw data/epa_so2_2019.csv")
+raw2020 <- read_csv("raw data/epa_so2_2020.csv")
+raw2021 <- read_csv("raw data/epa_so2_2021.csv")
+raw2022 <- read_csv("raw data/epa_so2_2022.csv")
+raw2023 <- read_csv("raw data/epa_so2_2023.csv")
+```
+
+Union the data into one dataframe
+```{R}
+epa_so2 <- union(raw2017, raw2018)
+epa_so2 <- union(epa_so2, raw2019)
+epa_so2 <- union(epa_so2, raw2020)
+epa_so2 <- union(epa_so2, raw2021)
+epa_so2 <- union(epa_so2, raw2022)
+epa_so2 <- union(epa_so2, raw2023)
+```
+
+Data cleaning
+```{R}
+epa_so2 |>
+  mutate(Date = as.Date(Date, format = "%m/%d/%Y")) |>
+  mutate(Site.ID = as.integer(`Site ID`)) |>
+  mutate(Site.Name = `Site Name`) |>
+  mutate(POC = as.integer(POC)) |>
+  mutate(DAILY_AQI_VALUE = as.integer(DAILY_AQI_VALUE)) |>
+  mutate(DAILY_OBS_COUNT = as.integer(DAILY_OBS_COUNT)) |>
+  mutate(PERCENT_COMPLETE = (as.numeric(PERCENT_COMPLETE) / 100)) |>
+  mutate(AQS_PARAMETER_CODE = as.integer(AQS_PARAMETER_CODE)) |>
+  mutate(CBSA_CODE = as.integer(CBSA_CODE)) |>
+  arrange(Date) |>
+  write.csv("clean_data/so2_fontana.csv", row.names = FALSE)
+```
