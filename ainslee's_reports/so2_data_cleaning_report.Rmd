@@ -10,6 +10,7 @@ library(tidyverse)
 
 Read in the data
 ```{R}
+setwd("~/Programming/p-ollution-sp24")
 raw2017 <- read_csv("raw data/epa_so2_2017.csv")
 raw2018 <- read_csv("raw data/epa_so2_2018.csv")
 raw2019 <- read_csv("raw data/epa_so2_2019.csv")
@@ -32,15 +33,18 @@ epa_so2 <- union(epa_so2, raw2023)
 Data cleaning
 ```{R}
 epa_so2 |>
-  mutate(Date = as.Date(Date, format = "%m/%d/%Y")) |>
-  mutate(Site.ID = as.integer(`Site ID`)) |>
-  mutate(Site.Name = `Site Name`) |>
+  # mutate(Date = as.Date(Date, format = "%m/%d/%Y")) |>
+  mutate(`Site ID` = as.integer(`Site ID`)) |>
+  rename(Site.ID = `Site ID`) |>
+  rename(Site.Name = `Site Name`) |>
+  mutate(Year = substr(epa_so2$Date, nchar(epa_so2$Date) - 3, nchar(epa_so2$Date))) |>
   mutate(POC = as.integer(POC)) |>
   mutate(DAILY_AQI_VALUE = as.integer(DAILY_AQI_VALUE)) |>
   mutate(DAILY_OBS_COUNT = as.integer(DAILY_OBS_COUNT)) |>
   mutate(PERCENT_COMPLETE = (as.numeric(PERCENT_COMPLETE) / 100)) |>
   mutate(AQS_PARAMETER_CODE = as.integer(AQS_PARAMETER_CODE)) |>
   mutate(CBSA_CODE = as.integer(CBSA_CODE)) |>
+  select(Year, everything()) |>
   arrange(Date) |>
   write.csv("clean_data/so2_fontana.csv", row.names = FALSE)
 ```
