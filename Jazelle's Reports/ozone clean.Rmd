@@ -1,0 +1,44 @@
+---
+title: "ozone"
+output: html_document
+date: "2024-03-22"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+## R Markdown
+
+DATA FRAMES for Ozone -- Daily Data 
+```{r}
+#data sets 
+oz_2017 <- read.csv("~/Desktop/p-ollution sp 24/ozone daily data/ozone 17.csv")
+oz_2018 <- read.csv("~/Desktop/p-ollution sp 24/ozone daily data/2018.csv")
+oz_2019 <- read.csv("~/Desktop/p-ollution sp 24/ozone daily data/2019.csv")
+oz_2020 <- read.csv("~/Desktop/p-ollution sp 24/ozone daily data/2020.csv")
+oz_2021 <- read.csv("~/Desktop/p-ollution sp 24/ozone daily data/2021.csv")
+oz_2022 <- read.csv("~/Desktop/p-ollution sp 24/ozone daily data/2022.csv")
+oz_2023 <- read.csv("~/Desktop/p-ollution sp 24/ozone daily data/2023.csv")
+oz_2024 <- read.csv("~/Desktop/p-ollution sp 24/ozone daily data/2024.csv")
+ozone_df <- c(oz_2017, oz_2018, oz_2019, oz_2020, oz_2021, oz_2022, oz_2023, oz_2024)
+```
+
+```{r}
+ozone <- bind_rows(oz_2017, oz_2018, oz_2019, oz_2020, oz_2021, oz_2022, oz_2023, oz_2024)
+```
+
+```{r}
+view(ozone)
+```
+
+```{r}
+# take out controls -- Site.Name, CBSA_Code, State Code, State, County_Code, County, Site Latitude, Site Longitude, etc
+ozone2 = subset(ozone, select = -c(Site.Name, CBSA_CODE, CBSA_NAME, STATE_CODE, STATE, COUNTY_CODE, COUNTY, SITE_LATITUDE, SITE_LONGITUDE) )
+```
+
+```{r}
+view(ozone2)
+```
+
