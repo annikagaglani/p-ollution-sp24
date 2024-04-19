@@ -53,7 +53,7 @@ if __name__ == "__main__":
         print(f"Available functions: {', '.join(available_functions)}")
         sys.exit(1)
     
-    input_file = sys.argv[1] # TODO: prep for looping through all the data files
+    input_file = sys.argv[1] # TODO: set this up for so2
     function_name = sys.argv[2]
 
     series = read_csv(input_file, header=0, parse_dates=[0], index_col=0, date_parser=parser)
