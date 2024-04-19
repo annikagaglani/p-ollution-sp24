@@ -15,16 +15,44 @@ library(dplyr)
 
 will write function later 
 ```{r}
-PM_25_Full <- read.csv("pm25_upland.csv")
-Ozone_Full <- read.csv("ozone_clean.csv")
+pm25_full <- read.csv("pm25_upland.csv")
+ozone_full <- read.csv("ozone_clean.csv")
+co_full <- read.csv("ontario_co.csv")
+so2_full <- read.csv("so2_fontana.csv")
 ```
 
 ```{r}
-date <- PM_25_Full$Date
-AQI <- PM_25_Full$DAILY_AQI_VALUE
+date <- pm25_full$Date
+AQI <- pm25_full$DAILY_AQI_VALUE
 PM25_ARIMA <- data.frame(date, AQI)
 PM25_ARIMA <- as.data.frame(PM25_ARIMA)
 
-write_csv(PM25_ARIMA, file = "PM25_ARIMA.csv")
+write_csv(PM25_ARIMA, file = "pm25_arima.csv")
 ```
 
+```{r}
+date <- Ozone_Full$Date
+AQI <- Ozone_Full$DAILY_AQI_VALUE
+Ozone_ARIMA <- data.frame(date, AQI)
+Ozone_ARIMA <- as.data.frame(Ozone_ARIMA)
+
+write_csv(Ozone_ARIMA, file = "ozone_arima.csv")
+```
+
+```{r}
+date <- co_full$Date
+AQI <- co_full$DAILY_AQI_VALUE
+co_ARIMA <- data.frame(date, AQI)
+co_ARIMA <- as.data.frame(Ozone_ARIMA)
+
+write_csv(co_ARIMA, file = "co_arima.csv")
+```
+
+```{r}
+date <- so2_full$Date
+AQI <- so2_full$DAILY_AQI_VALUE
+so2_ARIMA <- data.frame(date, AQI)
+so2_ARIMA <- as.data.frame(Ozone_ARIMA)
+
+write_csv(Ozone_ARIMA, file = "so2_arima.csv")
+```
