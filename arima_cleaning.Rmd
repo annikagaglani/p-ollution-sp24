@@ -15,7 +15,7 @@ library(dplyr)
 
 will write function later 
 ```{r}
-setwd("/Users/breckenenright/Desktop/p-ollution/p-ollution-sp24/clean-data")
+setwd("~/Users/breckenenright/Desktop/p-ollution/p-ollution-sp24/clean-data")
 PM_25_Full <- read.csv("pm25_upland.csv")
 Ozone_Full <- read.csv("ozone_clean.csv")
 ```
