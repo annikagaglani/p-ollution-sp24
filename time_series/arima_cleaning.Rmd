@@ -1,0 +1,30 @@
+---
+title: "Cleaning Script for ARIMA model data"
+output: html_document
+date: "2024-04-19"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r load-packages, message=FALSE}
+library(tidyverse) 
+library(dplyr)
+```
+
+will write function later 
+```{r}
+PM_25_Full <- read_csv("pm25_upland.csv")
+```
+
+
+```{r}
+date <- PM_25_Full$Date
+AQI <- PM_25_Full$DAILY_AQI_VALUE
+PM25_ARIMA <- data.frame(date, AQI)
+PM25_ARIMA <- as.data.frame(PM25_ARIMA)
+
+write_csv(PM25_ARIMA, file = "PM25_ARIMA.csv")
+```
+
