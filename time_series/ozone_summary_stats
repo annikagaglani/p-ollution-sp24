@@ -1,0 +1,48 @@
+<ipython-input-2-6cf3bb3eef18>:12: FutureWarning: The argument 'date_parser' is deprecated and will be removed in a future version. Please use 'date_format' instead, or read your data in as 'object' dtype and then call 'to_datetime'.
+  series = read_csv(input_file, header=0, parse_dates=[0], index_col=0, date_parser=parser)
+            AQI
+date           
+2017-01-01   30
+2017-01-01   32
+2017-01-01   31
+2018-01-01   41
+2018-01-01   35
+
+                               SARIMAX Results                                
+==============================================================================
+Dep. Variable:                    AQI   No. Observations:                 7635
+Model:                 ARIMA(5, 1, 0)   Log Likelihood              -35725.337
+Date:                Thu, 25 Apr 2024   AIC                          71462.675
+Time:                        19:09:06   BIC                          71504.317
+Sample:                             0   HQIC                         71476.962
+                               - 7635                                         
+Covariance Type:                  opg                                         
+==============================================================================
+                 coef    std err          z      P>|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+ar.L1         -0.2517      0.010    -26.350      0.000      -0.270      -0.233
+ar.L2         -0.2822      0.010    -27.515      0.000      -0.302      -0.262
+ar.L3         -0.2764      0.007    -40.336      0.000      -0.290      -0.263
+ar.L4         -0.2204      0.010    -21.339      0.000      -0.241      -0.200
+ar.L5         -0.2123      0.010    -22.156      0.000      -0.231      -0.193
+sigma2       680.0704      6.672    101.924      0.000     666.993     693.148
+===================================================================================
+Ljung-Box (L1) (Q):                   0.02   Jarque-Bera (JB):              5254.28
+Prob(Q):                              0.88   Prob(JB):                         0.00
+Heteroskedasticity (H):               3.90   Skew:                             0.39
+Prob(H) (two-sided):                  0.00   Kurtosis:                         6.99
+===================================================================================
+
+Warnings:
+[1] Covariance matrix calculated using the outer product of gradients (complex-step).
+
+
+                 0
+count  7635.000000
+mean      0.003667
+std      26.072485
+min    -118.724979
+25%      -9.269049
+50%      -0.450500
+75%       6.865100
+max     152.592420
