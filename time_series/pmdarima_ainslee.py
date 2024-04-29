@@ -4,6 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from pandas import read_csv, DataFrame
 from datetime import datetime
+from sklearn.externals import joblib
 
 print("hi idiot")
 
@@ -25,9 +26,17 @@ print("train test split done")
 model = pm.auto_arima(y_train, seasonal=True, m=365)
 print("model fit done")
 
+# Save model
+joblib.dump(model, 'arima_model.pkl')
+print("model saved")
+
 # Forecasts
 forecasts = model.predict(y_test.shape[0])
 print("forecasts done")
+
+# Save forecasts
+np.save('forecasts.npy', forecasts)
+print("forecasts saved")
 
 # Visualize the forecasts (blue=train, green=forecasts)
 print("visualizing...")
